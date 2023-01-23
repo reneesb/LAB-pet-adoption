@@ -1,0 +1,8 @@
+#petcards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  text-align: center;
+  width: 80%;
+  padding-bottom: 20px;
+}
