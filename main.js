@@ -279,3 +279,28 @@ for (const pet of pets) {
 }
 
 targetingApp.innerHTML = domString;
+
+const filter = (pets, type) => {
+  const petType = [];
+
+  for (const pet of pets) {
+    if (pet.type === type) {
+      petType.push(pet);
+    }
+  }
+  return petType;
+};
+
+const showDogsButton = document.querySelector("#dogs-button");
+const showCatsButton = document.querySelector("#cat-button");
+const showDinosButton = document.querySelector("#dinos-button");
+const showAllButton = document.querySelector("#all-button");
+
+showAllButton.addEventListener("click", () => {
+  targetingApp.innerHTML(pets);
+});
+
+showDogsButton.addEventListener("click", () => {
+  const dogs = filter(pets, "dogs");
+  targetingApp.innerHTML(dogs);
+});
