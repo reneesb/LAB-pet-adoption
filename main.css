@@ -1,8 +1,11 @@
-#petcards {
+#petCards {
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  text-align: center;
-  width: 80%;
-  padding-bottom: 20px;
+  flex-flow: row wrap;
+  margin: 20px;
+  border: 10px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
 }
