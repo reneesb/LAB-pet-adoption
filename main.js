@@ -284,4 +284,47 @@ const cardsOnDom = (pets) => {
   renderToDom("#petCards", domString);
 };
 
-//function to filter pets by type
+cardsOnDom(pets);
+
+//filter pets by type
+const filter = (array, type) => {
+  const petArray = [];
+
+  for (const pet of pets) {
+    if (pet.type === type) {
+      petArray.push(pet);
+    }
+  }
+
+  return petArray;
+};
+
+//target buttons on the DOM
+const showDogsButton = document.querySelector("#dogs-button");
+const showCatsButton = document.querySelector("#cat-button");
+const showDinosButton = document.querySelector("#dinos-button");
+const showAllButton = document.querySelector("#all-button");
+
+// get all the cards to render to the DOM
+cardsOnDom(pets);
+
+// add click event to filter each pet type
+showCatsButton.addEventListener("click", () => {
+  const allCats = filter(pets, "cat");
+  cardsOnDom(allCats);
+});
+
+showDogsButton.addEventListener("click", () => {
+  const allDogs = filter(pets, "dog");
+  cardsOnDom(allDogs);
+});
+
+showDinosButton.addEventListener("click", () => {
+  const allDinos = filter(pets, "dino");
+  cardsOnDom(allDinos);
+});
+
+showAllButton.addEventListener("click", () => {
+  const allPets = filter(pets, "");
+  cardsOnDom(pets);
+});
