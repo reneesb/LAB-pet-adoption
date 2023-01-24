@@ -261,46 +261,27 @@ const pets = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgrEHvsLeKOejgzWtV-aHhebk65D6LQO9YSZ_SC_FcAg&s",
   },
 ];
-
-const targetingApp = document.querySelector("#petCards");
-
-let domString = "";
-for (const pet of pets) {
-  domString += `<div class="card" style="width: 18rem;">
-  <img src=${pet.imageUrl} class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">${pet.name}</h5>
-    <h6> My ID# ${pet.id}</h6> <h6 class="color"> My class color is ${pet.color}</h6>
-    <h6>My class type is ${pet.type}</h6>
-    <p class="card-text">My special skill- ${pet.specialSkill}</p>
-    <a href="#" class="btn btn-primary">Adopt Me</a>
-  </div>
-</div>`;
-}
-
-targetingApp.innerHTML = domString;
-
-const filter = (pets, type) => {
-  const petType = [];
-
+const renderToDom = (divId, htmlToRender) => {
+  const selectedDiv = document.querySelector(divId);
+  selectedDiv.innerHTML = htmlToRender;
+};
+// get the cards on the dom
+const cardsOnDom = (pets) => {
+  let domString = "";
   for (const pet of pets) {
-    if (pet.type === type) {
-      petType.push(pet);
-    }
+    domString += `<div class="card" style="width: 18rem;">
+    <img src=${pet.imageUrl} class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${pet.name}</h5>
+      <h6> My ID# ${pet.id}</h6> 
+      <h6 class="color"> My class color is ${pet.color}</h6>
+      <h6>My class type is ${pet.type}</h6>
+      <p class="card-text">My special skill- ${pet.specialSkill}</p>
+      <a href="#" class="btn btn-primary">Adopt Me</a>
+    </div>
+  </div>`;
   }
-  return petType;
+  renderToDom("#petCards", domString);
 };
 
-const showDogsButton = document.querySelector("#dogs-button");
-const showCatsButton = document.querySelector("#cat-button");
-const showDinosButton = document.querySelector("#dinos-button");
-const showAllButton = document.querySelector("#all-button");
-
-showAllButton.addEventListener("click", () => {
-  targetingApp.innerHTML(pets);
-});
-
-showDogsButton.addEventListener("click", () => {
-  const dogs = filter(pets, "dogs");
-  targetingApp.innerHTML(dogs);
-});
+//function to filter pets by type
