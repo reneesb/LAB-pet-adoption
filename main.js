@@ -277,7 +277,7 @@ const cardsOnDom = (pets) => {
       <h6 class="color"> My class color is ${pet.color}</h6>
       <h6>My class type is ${pet.type}</h6>
       <p class="card-text">My special skill- ${pet.specialSkill}</p>
-      <a href="#" class="btn btn-primary">Adopt Me</a>
+      <button class="btn btn-danger" id="delete--${pet.id}">Delete</button>
     </div>
   </div>`;
   }
@@ -328,3 +328,65 @@ showAllButton.addEventListener("click", () => {
   const allPets = filter(pets, "");
   cardsOnDom(pets);
 });
+
+//create a function that grabs all values from the form.
+
+const createPet = (event) => {
+  event.preventDefault();
+
+  //grab the values
+  const id = document.querySelector("#id");
+  const name = document.querySelector("#name");
+  const color = document.querySelector("#color");
+  const skill = document.querySelector("#specialSkill");
+  const type = document.querySelector("#type");
+  const pic = document.querySelector("#imageUrl");
+  console.log(name);
+  console.log(name.value);
+
+  //create an object from the data
+  const newPet = {
+    id: pets.length + 1,
+    name: document.querySelector("#name").value,
+    color: document.querySelector("#color").value,
+    skill: document.querySelector("#specialSkill").value,
+    type: document.querySelector("#type").value,
+    pic: document.querySelector("#imageUrl").value,
+  };
+  console.log("new pet", newPet);
+
+  //push to pets array
+  pets.push(newPet);
+
+  //rerender new cards to DOM
+  cardsOnDom(pets);
+  document.querySelector("form").reset();
+};
+
+//add event listener for the add pet button and pass to function
+const addPet = document.querySelector("#form-submit");
+addPet.addEventListener("click", createPet);
+
+//delete  target the petcards div
+const appDiv = document.querySelector("#petCards");
+
+//add event listener
+appDiv.addEventListener("click", (e) => {
+  if (e.target.id.includes("delete")) {
+    console.log(e.target.id);
+
+    const [, petId] = e.target.id.split("--");
+
+    const index = pets.findIndex((e) => e.id === Number(petId));
+    //splice modifies the original array
+    pets.splice(index, 1);
+  }
+  cardsOnDom(pets);
+});
+
+const startApp = () => {
+  cardsOnDom(pets);
+};
+
+//console.log(e.target.id);
+startApp();
